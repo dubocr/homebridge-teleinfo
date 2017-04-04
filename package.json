@@ -1,0 +1,31 @@
+{
+  "name": "homebridge-teleinfo",
+  "version": "0.0.1",
+  "description": "Homebridge plugin for Teleinfo USB/Serial device",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dubocr/homebridge-teleinfo.git"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "teleinfo",
+    "energy",
+    "consumption",
+    "meter"
+  ],
+  "author": "Romain DUBOC",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dubocr/homebridge-teleinfo/issues"
+  },
+  "homepage": "https://github.com/dubocr/homebridge-teleinfo#readme",
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "dependencies": {
+    "inherits": "^2.0.3",
+    "serialport": "^4.0.7"
+  }
+}
