@@ -44,10 +44,14 @@ TeleinfoAccessory = function(log, config) {
 		if(data.BASE) {
 			that.energy.updateValue(data.BASE/1000);
 		}
+		if(data.HCHP && data.HCHC) {
+			that.energy.updateValue((data.HCHP+data.HCHC)/1000);
+		}
 	});
 
 	trameEvents.on('error', function (err) {
-		log(err);
+		if(err.message != 'Trame incomplete')
+			log(err.message);
 	});
 };
 
