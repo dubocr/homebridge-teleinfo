@@ -5,7 +5,7 @@ Supports USB/Serial teleinfo devices on HomeBridge
 # Installation
 
 1. Install homebridge using: npm install -g homebridge
-2. Install this plugin using: npm install -g homebridge-teleinfo --unsafe-perm --build-from-source
+2. Install this plugin using: sudo npm install -g homebridge-teleinfo --unsafe-perm --build-from-source
 3. Update your configuration file. See bellow for a sample.
 
 Your homebridge installation must run as root/sudo
@@ -26,7 +26,7 @@ Configuration sample:
         	{
             	"accessory": "Teleinfo",
             	"name": "Meter",
-	    				"port": "/dev/ttyAMA0"
+            	"port": "/dev/ttyAMA0"
         	}
         ],
     }
@@ -40,5 +40,5 @@ Configuration sample:
 # Compatible devices
 
 You can find teleinfo devices here :
-https://www.tindie.com/stores/Hallard/
-http://www.cartelectronic.fr/teleinfo-compteur-erdf/104-teleinfo-1-compteur-usb-lc.html
+- https://www.tindie.com/stores/Hallard/
+- http://www.cartelectronic.fr/teleinfo-compteur-erdf/104-teleinfo-1-compteur-usb-lc.html
