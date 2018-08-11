@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "inherits": "^2.0.3",
+    "fakegato-history": "^0.5.2",
     "serialport": "^4.0.7"
   }
 }

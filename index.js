@@ -15,7 +15,9 @@ module.exports = function(homebridge) {
     UUIDGen = homebridge.hap.uuid;
     Types = homebridge.hapLegacyTypes;
 
-		makeCharacteristics();
+	FakeGatoHistoryService = require('fakegato-history')(homebridge);
+
+	makeCharacteristics();
 		
     homebridge.registerAccessory('homebridge-teleinfo', 'Teleinfo', TeleinfoAccessory);
 }
@@ -27,19 +29,25 @@ TeleinfoAccessory = function(log, config) {
 	if (!config.name) {
 		throw new Error('Invalid or missing `name` configuration.');
 	}
-  this.service = new Service.Outlet(config.name);
+	
+  	this.service = new Service.Outlet(config.name);
 	this.service.addCharacteristic(EnergyConsumption);
 	this.service.addCharacteristic(PowerConsumption);
 		
-  this.energy = this.service.getCharacteristic(EnergyConsumption);
-  this.power = this.service.getCharacteristic(PowerConsumption);
+  	this.energy = this.service.getCharacteristic(EnergyConsumption);
+  	this.power = this.service.getCharacteristic(PowerConsumption);
     
-  var that = this;
+  	var that = this;
 	var trameEvents = teleinfo(config.port);
+	
+	this.historyService = new FakeGatoHistoryService("energy", this, {
+		storage: 'fs'
+	});
 
 	trameEvents.on('tramedecodee', function (data) {
 		if(data.PAPP) {
 			that.power.updateValue(data.PAPP);
+			this.historyService.addEntry({ time: new Date().getTime() / 1000, power: data.PAPP });
 		}
 		if(data.BASE) {
 			that.energy.updateValue(data.BASE/1000);
@@ -57,7 +65,7 @@ TeleinfoAccessory = function(log, config) {
 
 TeleinfoAccessory.prototype = {
 	getServices() {
-    return [this.service];
+    return [this.service, this.historyService];
   }
 }
 
